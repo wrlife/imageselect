@@ -1,0 +1,49 @@
+function Subseq_select(inputDir,outputDir, features)
+
+%% Get image list
+% get image filenames from directory
+image_set = imageSet(inputDir);
+
+%% Initialization
+init=0; 
+keyframes = [];  % store all currently selected frames
+
+%% Loop through images
+
+for i = 1:image_set.Count
+    
+    % TODO use deep learning to recognize good image
+    
+    %Read image and perform feature detection
+    imgnew = read(image_set,i);
+    graynew = rgb2gray(imgnew);
+
+    % Detect and extract features
+    if strcmpi(features,'BRISK')
+        pointsnew = detectBRISKFeatures(graynew); 
+    elseif strcmpi(features,'FAST')
+        pointsnew = detectFASTFeatures(graynew);
+    elseif strcmpi(features,'HARRIS')
+        pointsnew = detectHarrisFeatures(graynew);
+    elseif strcmpi(features,'SURF')
+        pointsnew = detectSURFFeatures(graynew,'MetricThreshold',100);
+    end
+    
+    [featuresnew, pointsnew] = extractFeatures(graynew, pointsnew); 
+    tmpkeyframe.image = imgnew;
+    tmpkeyframe.points = pointsnew;
+    tmpkeyframe.features = featuresnew;
+    
+    
+    %Find the best match
+    if init==0
+        keyframes = [keyframes,tmpkeyframe];
+        init=1;
+    else
+        
+    
+    
+    
+    
+end
+    

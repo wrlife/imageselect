@@ -138,10 +138,10 @@ function align_all(inputDir, outputDir, startFrame, endFrame, features,blendmeth
     blender = vision.AlphaBlender('Operation', 'Binary mask', ...
     'MaskSource', 'Input port');
 
-% Create a 2-D spatial reference object defining the size of the panorama.
-xLimits = [xMin xMax];
-yLimits = [yMin yMax];
-panoramaView = imref2d([height width], xLimits, yLimits);
+    % Create a 2-D spatial reference object defining the size of the panorama.
+    xLimits = [xMin xMax];
+    yLimits = [yMin yMax];
+    panoramaView = imref2d([height width], xLimits, yLimits);
 
 
 
